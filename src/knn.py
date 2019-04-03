@@ -54,7 +54,7 @@ def extractData(info):
 # params: start, end - indexes for range to print
 def printPoints(start, end):
     for i in range(start, end):
-        print trainingPoints[i]
+        print (trainingPoints[i])
 
 # Similarity given by ||x_test - x_train||
 # params: a, b - data points to compare
@@ -109,7 +109,7 @@ def byMajority(testValue, k):
             count[neighbor[1]] = 1
 
     # return value with highest count            
-    return max(count.iteritems(), key = itemgetter(1))[0]
+    return max(count.items(), key = itemgetter(1))[0]
 
 # Find the percentage error of knn
 # returns: percentage error
@@ -135,7 +135,7 @@ def checkErrorRange(start, end, interval):
     errorRate = []
     ks = []
     
-    print "k\tError(%)\tTime(s)"
+    print ("k\tError(%)\tTime(s)")
     
     # select every nth k
     for i in range(start, end + 1):
@@ -144,12 +144,12 @@ def checkErrorRange(start, end, interval):
     
     # for every value of k, check error %
     for k in ks:  
-        intervalStart = time.clock()
+        intervalStart = time.perf_counter()
         error = checkError(k)
         intervalEnd = time.clock()
         timeInterval = intervalEnd - intervalStart        
         
-        print k, "\t", error, "\t\t", timeInterval
+        print (k, "\t", error, "\t\t", timeInterval)
         errorRate.append([i, error, timeInterval])
      
     return errorRate
@@ -158,14 +158,14 @@ def checkErrorRange(start, end, interval):
 trainingPoints = extractData(readFile(trainingFile))
 testPoints = extractData(readFile(testFile))
 
-print "K-Nearest Neighbors"
+print ("K-Nearest Neighbors")
 
 # Print params
-print "Item\t\tStart\t\tEnd"
-print "Dimensions:\t", dimS, "\t-\t", dimE
-print "Training:\t", trainS, "\t-\t", trainE
-print "Testing:\t", testS, "\t-\t", testE
-print "\n"
+print ("Item\t\tStart\t\tEnd")
+print ("Dimensions:\t", dimS, "\t-\t", dimE)
+print ("Training:\t", trainS, "\t-\t", trainE)
+print ("Testing:\t", testS, "\t-\t", testE)
+print ("\n")
 
 # Check Error for given: start/end k's, for every n k's
 checkErrorRange(1, 25, 2)
